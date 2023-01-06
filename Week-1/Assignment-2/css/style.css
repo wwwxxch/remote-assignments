@@ -1,5 +1,5 @@
 /**/
-body {
+* {
 	font-family: Georgia, Sans-serif;
 	margin: 0;
 }
@@ -32,16 +32,19 @@ body {
 	
 }
 
-.parent {
+.grandparent, .parent {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-wrap: wrap;
 }
 
 .child {
-	padding: 10px 170px 100px 170px;
+	
+	padding: 10px 170px 90px 170px;
 	margin: 10px;
 	border: 10px;
+	
 	background-color: #708090;
 }
 
@@ -49,7 +52,7 @@ body {
 #welcome {
 	background-color: lightblue;
 	text-align: center;
-	padding: 50px;
+	padding: 40px;
 	margin: 0px;
 
 }
@@ -57,3 +60,22 @@ body {
 #sectit {
 	text-align: center;
 }
+
+.buttondiv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px 0px 10px 0px;
+}
+.button {
+	background-color: lightblue;
+	border: none;
+	padding: 10px 15px;
+}
+/*
+@media screen and (min-width: 1200px) {
+  .parent {
+    width: 1200px;
+  }
+}
+*/
