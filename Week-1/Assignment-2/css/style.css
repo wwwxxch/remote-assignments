@@ -7,11 +7,7 @@
 .main-header,
 .main-nav {
 	display: flex;  
-}
-
-.main-nav {
-	list-style-type: none;
-
+	flex-wrap: wrap;
 }
 
 .main-header {
@@ -24,28 +20,37 @@
 }
 
 .logo {
-	padding: 0px 30px 0px 30px;
+	padding: 5px 30px;
+}
+
+.main-nav {
+	list-style-type: none;
+
 }
 
 .itemattr {
-	padding: 0px 30px 0px 30px;
+	padding: 5px 30px;
 	
 }
 
 .grandparent, .parent {
 	display: flex;
-	align-items: center;
-	justify-content: center;
 	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: center;
+	gap: 1%;
 }
 
 .child {
-	
+	background-color: #708090;
+	padding: 1% 15% 8% 15%;
+	margin: 1%;
+	/*
 	padding: 10px 170px 90px 170px;
 	margin: 10px;
 	border: 10px;
 	
-	background-color: #708090;
+	*/
 }
 
 
@@ -53,12 +58,11 @@
 	background-color: lightblue;
 	text-align: center;
 	padding: 40px;
-	margin: 0px;
-
 }
 
-#sectit {
+.sectit {
 	text-align: center;
+	margin: 1%;
 }
 
 .buttondiv {
@@ -72,10 +76,10 @@
 	border: none;
 	padding: 10px 15px;
 }
-/*
+
 @media screen and (min-width: 1200px) {
-  .parent {
-    width: 1200px;
-  }
+	.parent {
+		width: 1200px;
+	}
 }
-*/
+
