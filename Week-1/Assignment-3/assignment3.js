@@ -4,12 +4,34 @@
 function countAandB(input){
 	//code
 	var tot = 0;
+	var counta = 0;
+	var countb = 0;
+	var plurala = "";
+	var pluralb = "";
+	var printout;
 	for (var i=0; i<input.length; i++){
 		if (input[i] === 'a' || input[i] === 'b'){
 			tot = tot +1;
+			if (input[i] === 'a'){
+				counta +=1;
+			} else {
+				countb +=1;
+			}
+			
 		}
 	}
-	return(tot)
+	if (tot === 0){
+		printout = tot;
+	} else {
+		if (counta > 1){
+			plurala = "s"; 
+		}
+		if (countb >1){
+			pluralb = "s";
+		}
+		printout = tot + " (" + counta + " 'a' letter"+ plurala +" and " + countb +" 'b' letter" + pluralb +")";
+	}
+	return(printout);
 }
 
 function toNumber(input){
