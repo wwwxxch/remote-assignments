@@ -10,7 +10,7 @@ function max (numbers) {
       maxnum = numbers[i];
     }
   }
-  return (maxnum);
+  return maxnum;
 };
 
 function findPosition (numbers, target) {
@@ -22,7 +22,7 @@ function findPosition (numbers, target) {
       pos_value = numbers[i];
     }
   }
-  return (pos);
+  return pos;
 };
 
 console.log(max([1, 2, 4, 5])); // should print 5
