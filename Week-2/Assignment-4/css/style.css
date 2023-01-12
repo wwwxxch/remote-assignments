@@ -1,0 +1,152 @@
+/**/
+* {
+	font-family: Georgia, Sans-serif;
+	margin: 0;
+}
+
+/*================
+  header
+==================*/
+
+.main-header {
+	background-color: #eeeeee;
+}
+
+.main-header,
+.main-nav {
+	display: flex;  
+	flex-wrap: wrap;
+}
+
+.main-header {
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.main-logo {
+	display: flex;
+	align-items: center;
+}
+
+.imgbox {
+	height: 20px;
+	width: 20px;
+	position: relative;
+}
+
+.logoimg {
+	max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.logotxt {
+	padding: 10px 8px 10px 30px;
+}
+
+.main-nav {
+	list-style-type: none;
+}
+
+.itemattr {
+	padding: 13px 30px;
+	
+}
+
+/*================
+  WELCOME MESSAGE
+==================*/
+
+#welcome {
+	background-color: #cfdcec;
+	text-align: center;
+	padding: 70px;
+}
+
+/*================
+  SECTION TITLE
+==================*/
+
+.sectit {
+	text-align: center;
+	margin: 2%;
+}
+
+/*================
+  CONTENT BOX
+==================*/
+
+.grandparent, .parent {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: center;
+	gap: 1%;
+}
+
+.parent {
+	width: 80%;
+	}
+
+.child {
+	background-color: #8b98a8;
+	padding: 1% 15% 8% 15%;
+	margin: 1%;
+}
+
+/*================
+  BUTTON
+==================*/
+
+.buttondiv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px 0px 10px 0px;
+}
+.button {
+	background-color: #e0edfd;
+	border: none;
+	padding: 10px 15px;
+}
+
+/*================
+  media response
+==================*/
+
+@media screen and (min-width: 1200px) {
+	.parent {
+		width: 1200px;
+	}
+}
+
+@media screen and (max-width: 704px) {
+	.child {
+		padding: 3% 28% 28% 28%;
+		margin: 1%;
+	}
+}
+
+@media screen and (max-width: 617px) {
+	.main-header {
+		flex-direction: column;
+		align-items: center;
+	}
+	.main-nav {
+		flex-direction: column;
+		list-style-type: none;
+		padding: 0px;
+	}
+	.logotxt {
+		padding: 10px 8px 10px 15px;
+	}
+}
+
+
