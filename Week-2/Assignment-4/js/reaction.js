@@ -14,6 +14,7 @@ btnClick.addEventListener('click', () => {
     } else {
       hiddenBox[i].style.display = 'none';
     }
-  }  
+  }
+  btnClick.scrollIntoView();  
 });
 
