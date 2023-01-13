@@ -83,7 +83,7 @@
   CONTENT BOX
 ==================*/
 
-.grandparent, .parent {
+.hidegrandparent, .grandparent, .parent {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: stretch;
@@ -101,6 +101,11 @@
 	margin: 1%;
 }
 
+.hidegrandparent {
+  display: none;
+}
+
+*/
 /*================
   BUTTON
 ==================*/
@@ -115,6 +120,14 @@
 	background-color: #e0edfd;
 	border: none;
 	padding: 10px 15px;
+}
+
+/*================
+  footer
+==================*/
+
+.footerdiv {
+  padding: 1rem;
 }
 
 /*================
