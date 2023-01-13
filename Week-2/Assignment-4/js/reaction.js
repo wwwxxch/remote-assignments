@@ -15,5 +15,5 @@ btnClick.addEventListener('click', () => {
       hiddenBox[i].style.display = 'none';
     }
   }  
-})
+});
 
