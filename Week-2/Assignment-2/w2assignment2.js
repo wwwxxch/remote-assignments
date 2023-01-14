@@ -1,6 +1,5 @@
 function avg (data) {
   // let len = Object.values(data)[0];
-
   const prodarr = Object.values(data)[1];
   let pricesum = 0;
   let outputavg = 0;

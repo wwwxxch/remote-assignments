@@ -5,16 +5,15 @@ chgtext.addEventListener("click", () => {
 });
 
 // Show hidden boxes
-const btnClick = document.querySelector('.button');
-btnClick.addEventListener('click', () => {
-  const hiddenBox = document.querySelectorAll('.hidegrandparent');
+const btnClick = document.querySelector(".button");
+btnClick.addEventListener("click", () => {
+  const hiddenBox = document.querySelectorAll(".hidegrandparent");
   for (let i = 0; i < hiddenBox.length; i++) {
     if (hiddenBox[i].style.display === "" || hiddenBox[i].style.display === "none") {
-      hiddenBox[i].style.display = 'flex';
+      hiddenBox[i].style.display = "flex";
     } else {
-      hiddenBox[i].style.display = 'none';
+      hiddenBox[i].style.display = "none";
     }
   }
-  btnClick.scrollIntoView();  
+  btnClick.scrollIntoView();
 });
-

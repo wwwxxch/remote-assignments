@@ -1,7 +1,6 @@
 // 1.max: find the max value of an array of numbers
 // 2.findPosition: find the first position of the target number inside an array of numbers.
 // The position should be counted starting from 0, if you can't find the target, please return -1
-
 function max (numbers) {
   let maxnum;
   maxnum = numbers[0];
