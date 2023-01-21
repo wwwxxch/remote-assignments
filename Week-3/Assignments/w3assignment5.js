@@ -58,14 +58,14 @@ function twoSum (nums, target) {
       endpos -= 1;
     } else if (sortarr[startpos] !== sortarr[endpos]) {
       // console.log("case3", startpos, endpos, sortarr[startpos], sortarr[endpos]);
-      // return [(nums.indexOf(sortarr[startpos])), (nums.indexOf(sortarr[endpos]))];
-      console.log([(nums.indexOf(sortarr[startpos])), (nums.indexOf(sortarr[endpos]))]);
-      break;
+      return [(nums.indexOf(sortarr[startpos])), (nums.indexOf(sortarr[endpos]))];
+      // console.log([(nums.indexOf(sortarr[startpos])), (nums.indexOf(sortarr[endpos]))]);
+      // break;
     } else if (sortarr[startpos] === sortarr[endpos]) {
       // console.log("case4", startpos, endpos, sortarr[startpos], sortarr[endpos]);
-      // return [(nums.indexOf(sortarr[startpos])), (nums.lastIndexOf(sortarr[endpos]))];
-      console.log([(nums.indexOf(sortarr[startpos])), (nums.lastIndexOf(sortarr[endpos]))]);
-      break;
+      return [(nums.indexOf(sortarr[startpos])), (nums.lastIndexOf(sortarr[endpos]))];
+      // console.log([(nums.indexOf(sortarr[startpos])), (nums.lastIndexOf(sortarr[endpos]))]);
+      // break;
     }
   }
 }
