@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sum of natural numbers</title>
+  </head>
+  <body>
+    <main>
+      <h3>Sum of natural numbers</h3>
+      <form action="/data" method="get" class="inputform">
+        <label for="numberxxx">Please enter a positive number: </label>
+        <input type="text" name="numberxxx" class="inputtext" value="10"/>
+        <button type="submit" class="submitbtn">submit</button>
+      </form>
+      <div id="sumresult" style="display:none">
+      </div>
+    </main>
+  </body>
+  <!------------------------Inline JavaScript------------------------>
+  <script>
+    const summitClick = document.querySelector(".submitbtn");
+    summitClick.addEventListener("click", (e) => {
+      e.preventDefault();      
+      let inputnum = document.querySelector(".inputtext").value;
+      
+      // AJAX
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200 ) {
+          let resultfromdata = xhr.responseText;  
+          document.getElementById('sumresult').innerHTML = `<p><b>Result: </b></p><p>${resultfromdata}</p>`;
+        }
+      };
+      xhr.open('GET', `/data?number=${inputnum}`);
+      xhr.send();
+
+      const show = document.getElementById("sumresult");
+      if (show.style.display === "none") {
+        show.style.display = "block";
+      }
+
+    });
+  </script>
+</html>
