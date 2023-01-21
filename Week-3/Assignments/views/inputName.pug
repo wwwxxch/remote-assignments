@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+  head 
+    title myName 
+  body
+    if nameinpug
+      h2 Hi, #{nameinpug}!
+      form(action="/clearName", method="post")
+        button(type="submit") Clear
+    else
+      form(action="/trackName", method="get")
+        label Please enter your name: 
+          input(type="text", name="name")
+        button(type="submit") Submit
+        
+    
