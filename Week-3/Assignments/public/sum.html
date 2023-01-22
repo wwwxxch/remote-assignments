@@ -12,6 +12,7 @@
         <label for="numberxxx">Please enter a positive integer: </label>
         <input type="text" name="numberxxx" class="inputtext" value="10"/>
         <button type="submit" class="submitbtn">submit</button>
+        <button type="submit" class="longcharbtn">large input testing</button>
       </form>
       <div id="sumresult" style="display:none">
       </div>
@@ -35,6 +36,44 @@
       xhr.open('GET', `/data?number=${inputnum}`);
       xhr.send();
 
+      // hide the result block first
+      const show = document.getElementById("sumresult");
+      if (show.style.display === "none") {
+        show.style.display = "block";
+      }
+
+    });
+
+    // When input number is very large
+    const testClick = document.querySelector(".longcharbtn");
+    testClick.addEventListener("click", (e) => {
+      e.preventDefault();      
+      let rawinputnum = document.querySelector(".inputtext").value;
+      let mult = Number(rawinputnum);
+      let inputnum;
+      if (Number.isInteger(mult) === false || (mult <= 0 && rawinputnum === '0') ) {
+        inputnum = "!NOT A POSITIVE INTEGER!";
+      } else if (Number.isInteger(mult) === true) {
+        inputnum = "1".repeat(mult);
+      } else {
+        let inputnum = null;
+      };
+
+      // AJAX
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200 ) {
+          let resultfromdata = xhr.responseText;  
+          document.getElementById('sumresult').innerHTML = `
+            <p><b>Large Input Testing</b><p> 
+            <p><b>1 repeat ${rawinputnum} time(s), now positive integer = ${inputnum}, result is: </b></p>
+            <p>${resultfromdata}</p>`;
+        }
+      };
+      xhr.open('GET', `/data?number=${inputnum}`);
+      xhr.send();
+
+      // hide the result block first
       const show = document.getElementById("sumresult");
       if (show.style.display === "none") {
         show.style.display = "block";
