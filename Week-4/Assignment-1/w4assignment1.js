@@ -40,8 +40,8 @@ delayedResultPromise(4, 5, 3000).then(console.log);
 // C. To implement it using async/await this time.
 async function main () {
   // your code here, you should call delayedResultPromise here and get the result using async/await.
-  const add1 = await delayedResultPromise(4, 8, 3000).then(console.log);
-  const add2 = await delayedResultPromise(-5, 9, 2000).then(console.log);
+  await delayedResultPromise(4, 8, 3000).then(console.log);
+  await delayedResultPromise(-5, 9, 2000).then(console.log);
 };
 
 main(); // result will be shown in the console after <delayTime> seconds
