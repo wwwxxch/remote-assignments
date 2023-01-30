@@ -1,6 +1,7 @@
 // -------------------------------------------------------------------
 // Show SignIn form or SignUp form
 const showmsg = document.getElementById('reminder');
+const showinstr = document.getElementById('instruction');
 const signinClick = document.querySelector(".show-signin");
 const signupClick = document.querySelector(".show-signup");
 const signindiv = document.getElementById('sign-in');
@@ -8,16 +9,24 @@ const signupdiv = document.getElementById('sign-up');
 
 signinClick.addEventListener('click', () => {
   // show SignIn(OLD) form & hide SignUp(NEW) form
-  signindiv.style.display = "block";
+  signindiv.style.display = "flex";
   signupdiv.style.display = "none";
-  document.getElementById('instruction').innerText = "SIGN-IN";
+
+  showinstr.style.display = "block";
+  showinstr.innerText = "SIGN-IN";
+
+  showmsg.style.display = "block";
   showmsg.innerText = "";
 });
 signupClick.addEventListener('click', () => {
   // show SignUp(NEW) form & hide SignIn(OLD) form
-  signupdiv.style.display = "block";
+  signupdiv.style.display = "flex";
   signindiv.style.display = "none";
-  document.getElementById('instruction').innerText = "SIGN-UP";
+
+  showinstr.style.display = "block";
+  showinstr.innerText = "SIGN-UP";
+
+  showmsg.style.display = "block";
   showmsg.innerText = "";
 });
 

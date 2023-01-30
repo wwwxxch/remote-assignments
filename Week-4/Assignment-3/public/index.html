@@ -4,17 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <main>
-      <h1>Home</h1>
-      <div>
+      <h1 id="h1title">Home</h1>
+      <div id="buttonplace">
         <button type="button" class="show-signin">SignIn</button>
         <button type="button" class="show-signup">SignUp</button>
       </div>
-      <h3 id="instruction"></h3>
+
       <div>
-        <p id="reminder"></p>
+        <h3 id="instruction" style="display: none"></h3>
+      </div>
+      <div>
+        <p id="reminder" style="display: none"></p>
       </div>
 
       <!--SignIn (OLD) form-->
@@ -26,7 +30,7 @@
           <label for="oldpwd">Password: </label>
           <input type="password" name="oldpwd" class="oldpwd"/>
           <p></p>
-          <button type="submit" class="oldsubmit">submit</button>
+          <button type="submit" class="oldsubmit">Submit</button>
         </form>
       </div>
 
@@ -42,7 +46,7 @@
           <label for="newpwd">Password: </label>
           <input type="password" name="newpwd" class="newpwd"/>
           <p></p>
-          <button type="submit" class="newsubmit">submit</button>
+          <button type="submit" class="newsubmit">Submit</button>
         </form>        
       </div>
 
