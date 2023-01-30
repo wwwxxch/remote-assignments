@@ -1,6 +1,12 @@
 #filename: .gitignore
 
-/node_modules
+node_modules
+## package.json & package-lock.json under remote-assignments folder
+/package.json
+/package-lock.json
+
 .eslintignore
 .eslintrc.json
-/Week-3/Assignments/node_modules
+
+# .env: not committed, with security information
+/Week-4/Assignment-3/config/.env
