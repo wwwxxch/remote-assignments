@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <main>
+      <h1>Home</h1>
+      <div>
+        <button type="button" class="show-signin">SignIn</button>
+        <button type="button" class="show-signup">SignUp</button>
+      </div>
+      <h3 id="instruction"></h3>
+      <div>
+        <p id="reminder"></p>
+      </div>
+
+      <!--SignIn (OLD) form-->
+      <div id="sign-in" style="display:none">
+        <form action="/" method="post" class="form-signin">
+          <label for="oldemail">E-mail: </label>
+          <input type="email" name="oldemail" class="oldemail"/>
+          <p></p>
+          <label for="oldpwd">Password: </label>
+          <input type="password" name="oldpwd" class="oldpwd"/>
+          <p></p>
+          <button type="submit" class="oldsubmit">submit</button>
+        </form>
+      </div>
+
+      <!--SignUp (NEW) form-->
+      <div id="sign-up" style="display:none">
+        <form action="/" method="post" class="form-signup">
+          <label for="newname">Name: </label>
+          <input type="text" name="newname" class="newname"/>
+          <p></p>
+          <label for="newemail">E-mail: </label>
+          <input type="email" name="newemail" class="newemail"/>
+          <p></p>
+          <label for="newpwd">Password: </label>
+          <input type="password" name="newpwd" class="newpwd"/>
+          <p></p>
+          <button type="submit" class="newsubmit">submit</button>
+        </form>        
+      </div>
+
+    </main>
+  </body>
+  <script src="js/dom.js"></script>
+</html>
