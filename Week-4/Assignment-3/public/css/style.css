@@ -5,7 +5,7 @@
 body {
   font-family: Georgia, sans-serif;
   margin: auto;
-  width: 60%;
+  width: 50%;
   height: 100%;   
   display:flex;
   flex-direction:column;
@@ -41,7 +41,9 @@ body {
 /*--- second section---*/
 #buttonplace {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
   background-color: #aeb7b3;
   padding: 20px 50px;
 }
@@ -55,6 +57,7 @@ body {
   color: #323436;
   border: none;
   cursor: pointer;
+  width: 100px;
   padding: 10px 20px;
 }
 
