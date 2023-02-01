@@ -29,9 +29,11 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  CONSTRAINT `user_chk_1` CHECK ((`name` <> _big5'')),
-  CONSTRAINT `user_chk_2` CHECK ((`email` <> _big5'')),
-  CONSTRAINT `user_chk_3` CHECK ((`password` <> _big5''))
+  UNIQUE KEY `email` (`email`),
+  CONSTRAINT `user_chk_1` CHECK ((`name` <> _utf8mb4'')),
+  CONSTRAINT `user_chk_2` CHECK ((`email` <> _utf8mb4'')),
+  CONSTRAINT `user_chk_3` CHECK ((`password` <> _utf8mb4'')),
+  CONSTRAINT `user_chk_4` CHECK ((`email` <> _big5''))
 ) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,6 +75,37 @@ LOCK TABLES `article` WRITE;
 INSERT INTO `article` VALUES (1,'Zaki Bridges','ALIEN And The Chuck Norris Effect','Praesent euismod. Donec nulla '),(2,'Fergus Roach','Improve(Increase) Your ALIEN In 3 Days','Proin pharetra nonummy pede. M'),(3,'Ruben Harding','Here\'s A Quick Way To Solve A Problem with ALIEN','Nunc lacus metus'),(4,'Sonny Carter','How To Win Buyers And Influence Sales with ALIEN','Donec elit est'),(5,'Syed O\'Moore','9 Ways ALIEN Can Make You Invincible','Sed velit urna'),(6,'Grace Lynn','Sexy ALIEN','Quisque ornare placerat risus.'),(7,'Jazmine Peck','27 Ways To Improve ALIEN','Nam vulputate. Duis a quam non'),(8,'Rhys Montes','How To Turn ALIEN Into Success','Duis a quam non neque lobortis'),(9,'Amelie Miranda','Why You Really Need (A) ALIEN','Etiam at ligula et tellus ulla'),(10,'Aryan Banks','Take The Stress Out Of ALIEN','Lorem ipsum dolor sit amet'),(11,'Katy Daugherty','Master (Your) ALIEN in 5 Minutes A Day','Donec blandit feugiat ligula. '),(12,'Roger Bell','52 Ways To Avoid ALIEN Burnout','Fusce iaculis'),(13,'Fergus Roach','If ALIEN Is So Terrible, Why Don\'t Statistics Show It?','Aliquam at eros. Etiam at ligu'),(14,'Oskar Hull','How To Sell ALIEN','Aenean nec lorem. In porttitor'),(15,'Ronnie Snow','Make Your ALIENA Reality','Donec hendrerit'),(16,'Nannie Chapman','Why ALIEN Is The Only Skill You Really Need','Donec metus massa'),(17,'Ajay Mccann','Little Known Ways To Rid Yourself Of ALIEN','In in nunc. Class aptent tacit'),(18,'Roger Bell','Read This Controversial Article And Find Out More About ALIEN','Nullam hendrerit bibendum just'),(19,'Rayhan Frye','14 Days To A Better ALIEN','Donec ut est in lectus consequ'),(20,'Grace Lynn','Top 10 Tips To Grow Your ALIEN','Aliquam nonummy adipiscing aug'),(21,'Sion Rogers','Here Is A Quick Cure For ALIEN','Pellentesque porttitor'),(22,'Matteo Lam','5 Ways You Can Get More ALIEN While Spending Less','Nunc ac magna. Maecenas odio d'),(23,'Daniyal Ochoa','How To Make Your ALIEN Look Amazing In 5 Days','Ut tincidunt volutpat urna. Ma'),(24,'Seren Bishop','5 Things To Do Immediately About ALIEN','In porttitor. Donec laoreet no'),(25,'Omer Jones','How To Make Your ALIEN Look Like A Million Bucks','Proin semper'),(26,'Harris Schwartz','ALIEN? It\'s Easy If You Do It Smart','In fermentum'),(27,'Celine Buck','How To Make Your Product Stand Out With ALIEN','Integer nulla. Donec blandit f'),(28,'Samir Atkinson','The Number One Reason You Should (Do) ALIEN','Pellentesque cursus sagittis f'),(29,'Wade Noble','Your Key To Success: ALIEN','Lorem ipsum dolor sit amet'),(30,'Bernice Farrell','3 Easy Ways To Make ALIEN Faster','Mauris et orci. Aenean nec lor'),(31,'Roger Bell','How To Find The Right ALIEN For Your Specific Service.','Maecenas odio dolor');
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `article_ver2`
+--
+
+DROP TABLE IF EXISTS `article_ver2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `article_ver2` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `content` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `article_ver2_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `article_ver2_chk_1` CHECK ((`user_id` > 0)),
+  CONSTRAINT `article_ver2_chk_2` CHECK ((`title` <> _big5'')),
+  CONSTRAINT `article_ver2_chk_3` CHECK ((`content` <> _big5''))
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `article_ver2`
+--
+
+LOCK TABLES `article_ver2` WRITE;
+/*!40000 ALTER TABLE `article_ver2` DISABLE KEYS */;
+INSERT INTO `article_ver2` VALUES (1,61,'ALIEN And The Chuck Norris Effect','Praesent euismod. Donec nulla '),(2,41,'Improve(Increase) Your ALIEN In 3 Days','Proin pharetra nonummy pede. M'),(3,54,'Here\'s A Quick Way To Solve A Problem with ALIEN','Nunc lacus metus'),(4,58,'How To Win Buyers And Influence Sales with ALIEN','Donec elit est'),(5,59,'9 Ways ALIEN Can Make You Invincible','Sed velit urna'),(6,42,'Sexy ALIEN','Quisque ornare placerat risus.'),(7,44,'27 Ways To Improve ALIEN','Nam vulputate. Duis a quam non'),(8,51,'How To Turn ALIEN Into Success','Duis a quam non neque lobortis'),(9,2,'Why You Really Need (A) ALIEN','Etiam at ligula et tellus ulla'),(10,37,'Take The Stress Out Of ALIEN','Lorem ipsum dolor sit amet'),(11,45,'Master (Your) ALIEN in 5 Minutes A Day','Donec blandit feugiat ligula. '),(12,52,'52 Ways To Avoid ALIEN Burnout','Fusce iaculis'),(13,41,'If ALIEN Is So Terrible, Why Don\'t Statistics Show It?','Aliquam at eros. Etiam at ligu'),(14,49,'How To Sell ALIEN','Aenean nec lorem. In porttitor'),(15,53,'Make Your ALIENA Reality','Donec hendrerit'),(16,47,'Why ALIEN Is The Only Skill You Really Need','Donec metus massa'),(17,1,'Little Known Ways To Rid Yourself Of ALIEN','In in nunc. Class aptent tacit'),(18,52,'Read This Controversial Article And Find Out More About ALIEN','Nullam hendrerit bibendum just'),(19,50,'14 Days To A Better ALIEN','Donec ut est in lectus consequ'),(20,42,'Top 10 Tips To Grow Your ALIEN','Aliquam nonummy adipiscing aug'),(21,57,'Here Is A Quick Cure For ALIEN','Pellentesque porttitor'),(22,46,'5 Ways You Can Get More ALIEN While Spending Less','Nunc ac magna. Maecenas odio d'),(23,40,'How To Make Your ALIEN Look Amazing In 5 Days','Ut tincidunt volutpat urna. Ma'),(24,56,'5 Things To Do Immediately About ALIEN','In porttitor. Donec laoreet no'),(25,48,'How To Make Your ALIEN Look Like A Million Bucks','Proin semper'),(26,43,'ALIEN? It\'s Easy If You Do It Smart','In fermentum'),(27,39,'How To Make Your Product Stand Out With ALIEN','Integer nulla. Donec blandit f'),(28,55,'The Number One Reason You Should (Do) ALIEN','Pellentesque cursus sagittis f'),(29,60,'Your Key To Success: ALIEN','Lorem ipsum dolor sit amet'),(30,38,'3 Easy Ways To Make ALIEN Faster','Mauris et orci. Aenean nec lor'),(31,52,'How To Find The Right ALIEN For Your Specific Service.','Maecenas odio dolor');
+/*!40000 ALTER TABLE `article_ver2` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -83,4 +116,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-30 15:44:44
+-- Dump completed on 2023-02-01 23:25:49
