@@ -38,15 +38,19 @@ const newClick = document.querySelector(".newsubmit");
 function clickfunc (typ) {
   // pass input value via json format
   let params;
+  // send post request to different routes
+  let url;
   if (typ === "old") {
     const inputval_olde = document.querySelector('.oldemail').value;
     const inputval_oldp = document.querySelector('.oldpwd').value;
     params = { oldemail: inputval_olde, oldpwd: inputval_oldp };
+    url = '/signin';
   } else if (typ === "new") {
     const inputval_newn = document.querySelector('.newname').value;
     const inputval_newe = document.querySelector('.newemail').value;
     const inputval_newp = document.querySelector('.newpwd').value;
     params = { newname: inputval_newn, newemail: inputval_newe, newpwd: inputval_newp };
+    url = '/signup';
   };
 
   const xhr = new XMLHttpRequest();
@@ -86,14 +90,15 @@ function clickfunc (typ) {
         } else if (serverres.includes("member")) {
           alert("Signup Successful!");
           location.replace(`${serverres}`);
-        // case 4 email founded in database
+        // case 4 email found in database
         } else if (serverres === "tosignin") {
           showmsg.innerText = 'Your email has been registered. Please click SignIn.';
         };
       }
     }
   };
-  xhr.open('POST', '/');
+
+  xhr.open('POST', url);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(params));
 }
