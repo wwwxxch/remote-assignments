@@ -1,6 +1,9 @@
 const mysql = require('mysql2');
 const path = require('path');
 const dotenv = require('dotenv');
+const bcrypt = require('bcrypt');
+const saltrounds = 5;
+
 dotenv.config({ path: path.resolve(__dirname, '../config/.env') });
 // dotenv.config();
 
@@ -12,38 +15,35 @@ const pool = mysql.createPool({
 }).promise();
 
 // =====================================================================
+async function getUser (sysid) {
+  const [row] = await pool.query(`
+    SELECT * FROM user 
+    WHERE id = ?`, [sysid]);
+  return row[0];
+};
+
 async function chkmail (mail) {
   const [row] = await pool.query(`
-    SELECT email
-    FROM user
-    WHERE email = ?
-  `, [mail]);
+    SELECT email FROM user
+    WHERE email = ?`, [mail]);
   return row[0]; // row[0] = { "email": "<mail>" }
 };
 
 async function chkpair (mail, pwd) {
   const [row] = await pool.query(`
-    SELECT email, password
-    FROM user
-    WHERE email = ? AND password = ?
-  `, [mail, pwd]);
-  return row[0]; // row[0] = { "email": "<mail>", "password": "<pwd>" }
-};
-
-async function getUser (sysid) {
-  const [row] = await pool.query(`
-      SELECT * 
-      FROM user
-      WHERE id = ?
-      `, [sysid]);
-  return row[0];
+    SELECT email, password FROM user
+    WHERE email = ?`, [mail]); // row[0] = { "email": "<mail>", "password": "<pwd>" }
+  if (row.length > 0) {
+    const validpwd = await bcrypt.compare(pwd, row[0].password);
+    return validpwd;
+  }
 };
 
 async function createUser (name, mail, pwd) {
+  const hashedpwd = await bcrypt.hash(pwd, saltrounds);
   const [result] = await pool.query(`
     INSERT INTO user (name, email, password)
-    VALUES (?, ?, ?)
-  `, [name, mail, pwd]);
+    VALUES (?, ?, ?)`, [name, mail, hashedpwd]);
   const newsysid = result.insertId;
   return getUser(newsysid);
 };
@@ -62,9 +62,9 @@ async function checkOld (input_mail, input_pwd) {
     returnval = "spaceinstr";
   } else if (getmail === undefined) {
     returnval = "notindb";
-  } else if (getpair === undefined) {
+  } else if (getpair === undefined || getpair === false) {
     returnval = "pwdwrong";
-  } else {
+  } else if (getpair === true) {
     returnval = "found";
   }
   return returnval;
@@ -95,10 +95,6 @@ async function checkNew (input_name, input_mail, input_pwd) {
 }
 
 module.exports = {
-  chkmail,
-  chkpair,
-  getUser,
-  createUser,
   checkOld,
   checkNew
 };
