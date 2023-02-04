@@ -10,3 +10,4 @@ node_modules
 
 # .env: not committed, with security information
 /Week-4/Assignment-3/config/.env
+/Week-4/Assignment-3/archive
