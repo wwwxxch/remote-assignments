@@ -1,14 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const {
-  getUser,
-  chkmail,
-  chkpair,
-  createUser,
-  checkOld,
-  checkNew
-} = require('../models/database');
 
+const { getNameByMail } = require('../models/database');
+const { checkOld } = require('../controllers/signinchk.js');
+const { checkNew } = require('../controllers/signupchk.js');
+// *********************************************************
+// GET ROUTES
+router.get('/', (req, res) => {
+  if (req.session.showname) {
+    return res.redirect('/member');
+  } else {
+    return res.render('home');
+  }
+});
+
+router.get('/member', (req, res) => {
+  if (req.session.showname) {
+    const memberName = req.session.showname;
+    res.render('member', { memberName });
+  } else {
+    return res.redirect('/');
+  }
+});
+
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+  return res.redirect('/');
+});
+
+// *********************************************************
+// Sign-In POST ROUTE
 router.post('/signin', async (req, res, next) => {
   try {
     // check signin(OLD) info input
@@ -21,27 +42,43 @@ router.post('/signin', async (req, res, next) => {
     if (oldresult && oldresult !== "found") {
       return res.send(oldresult);
     } else if (oldresult === "found") {
-      return res.send("/member.html");
+      // if login success then store the name to session
+      const nameobj = await getNameByMail(oldemail);
+      req.session.showname = nameobj.name;
+      return res.send("/member");
     }
   } catch (err) {
     next(err);
   }
 });
 
+// *********************************************************
+// Sign-Up POST ROUTE
 router.post('/signup', async (req, res, next) => {
   try {
     // check signup(NEW) info input
     const { newname } = req.body;
     const { newemail } = req.body;
     const { newpwd } = req.body;
+    const { newpconf } = req.body;
 
-    const newresult = await checkNew(newname, newemail, newpwd);
+    let newresult;
+    if (newpwd !== newpconf) {
+      // check if pwds match
+      newresult = 'pwdsnotmatch';
+      return newresult;
+    } else {
+      newresult = await checkNew(newname, newemail, newpwd);
+    }
 
     // send response for signup(NEW) input
-    if (newresult && newresult !== "new") {
-      return res.send(newresult);
-    } else if (newresult === "new") {
-      return res.send("/member.html");
+    // newresult: return object afterward
+    if (newresult.status && newresult.status !== "new") {
+      return res.send(newresult.status);
+    } else if (newresult.status === "new") {
+      // if signup success then store the name to session
+      req.session.showname = newresult.name;
+      return res.send("/member");
     }
   } catch (err) {
     next(err);

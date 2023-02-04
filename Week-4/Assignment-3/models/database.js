@@ -1,11 +1,12 @@
 const mysql = require('mysql2');
 const path = require('path');
 const dotenv = require('dotenv');
+
+// pwd encrypt
 const bcrypt = require('bcrypt');
 const saltrounds = 5;
 
-dotenv.config({ path: path.resolve(__dirname, '../config/.env') });
-// dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../config/.env') }); // dotenv.config();
 
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
@@ -15,13 +16,8 @@ const pool = mysql.createPool({
 }).promise();
 
 // =====================================================================
-async function getUser (sysid) {
-  const [row] = await pool.query(`
-    SELECT * FROM user 
-    WHERE id = ?`, [sysid]);
-  return row[0];
-};
 
+// check if the mail is inside the database
 async function chkmail (mail) {
   const [row] = await pool.query(`
     SELECT email FROM user
@@ -29,6 +25,7 @@ async function chkmail (mail) {
   return row[0]; // row[0] = { "email": "<mail>" }
 };
 
+// check if the input pwd is correct, return true or false
 async function chkpair (mail, pwd) {
   const [row] = await pool.query(`
     SELECT email, password FROM user
@@ -39,6 +36,23 @@ async function chkpair (mail, pwd) {
   }
 };
 
+// get name by input mail
+async function getNameByMail (mail) {
+  const [row] = await pool.query(`
+    SELECT name FROM user
+    WHERE email = ?`, [mail]);
+  return row[0]; // row[0] = { "name": "<name>" }
+}
+
+// get all columns by id
+async function getUser (sysid) {
+  const [row] = await pool.query(`
+    SELECT * FROM user 
+    WHERE id = ?`, [sysid]);
+  return row[0];
+};
+
+// create new records in the database
 async function createUser (name, mail, pwd) {
   const hashedpwd = await bcrypt.hash(pwd, saltrounds);
   const [result] = await pool.query(`
@@ -48,53 +62,10 @@ async function createUser (name, mail, pwd) {
   return getUser(newsysid);
 };
 
-async function checkOld (input_mail, input_pwd) {
-  const upd_inmail = input_mail.trim();
-  const upd_inpwd = input_pwd.trim();
-  const getmail = await chkmail(upd_inmail);
-  const getpair = await chkpair(upd_inmail, upd_inpwd);
-  let returnval = null;
-
-  if (!upd_inmail || !upd_inpwd ||
-      upd_inmail.length === 0 || upd_inpwd.length === 0) {
-    returnval = "blank";
-  } else if (/\s/.test(input_mail) || /\s/.test(input_pwd)) {
-    returnval = "spaceinstr";
-  } else if (getmail === undefined) {
-    returnval = "notindb";
-  } else if (getpair === undefined || getpair === false) {
-    returnval = "pwdwrong";
-  } else if (getpair === true) {
-    returnval = "found";
-  }
-  return returnval;
-}
-
-async function checkNew (input_name, input_mail, input_pwd) {
-  const upd_inname = input_name.trim();
-  const upd_inmail = input_mail.trim();
-  const upd_inpwd = input_pwd.trim();
-  const getmail = await chkmail(upd_inmail);
-  let returnval = null;
-
-  // name & email & password cannot be blank
-  if (!upd_inmail || !upd_inpwd || !upd_inname ||
-      upd_inmail.length === 0 || upd_inpwd.length === 0 || upd_inname.length === 0) {
-    returnval = "blank";
-  // check if there's space in input mail or password
-  } else if (/\s/.test(input_mail) || /\s/.test(input_pwd)) {
-    returnval = "spaceinstr";
-  // check if this mail has been exsited in database
-  } else if (getmail === undefined) {
-    createUser(upd_inname, upd_inmail, upd_inpwd);
-    returnval = "new";
-  } else {
-    returnval = "tosignin";
-  }
-  return returnval;
-}
-
 module.exports = {
-  checkOld,
-  checkNew
+  chkmail,
+  chkpair,
+  getNameByMail,
+  getUser,
+  createUser
 };
